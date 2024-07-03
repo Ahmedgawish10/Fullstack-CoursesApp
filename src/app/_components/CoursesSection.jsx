@@ -24,7 +24,7 @@ function CoursesSection() {
   };
 
   const [allCourses, setAllCourses] = useState([]);
-          const searchParams =useSearchParams()  ; 
+//          const searchParams =useSearchParams()  ; 
 
 
   useEffect(() => {
