@@ -3,10 +3,10 @@
 import { useRouter } from 'next/navigation';
 
 const PaginationControls = (
-  {
-    hasNextPage,
-    hasPrevPage,
-  }
+  // {
+  //   hasNextPage,
+  //   hasPrevPage,
+  // }
 ) => {
   const router = useRouter()
  // const searchParams = useSearchParams()
