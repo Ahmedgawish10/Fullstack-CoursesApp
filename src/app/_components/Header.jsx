@@ -140,7 +140,10 @@ function Header() {
               <Link onClick={emptySearch} href="/wishlist" className="flex items-center text-black text-2xl hover:cursor-pointer"><FaRegHeart/>
 
               </Link>
-              <Link onClick={emptySearch} href="/cart" className="flex items-center text-black text-2xl hover:cursor-pointer relative" onClick={getUserCart}><GrCart/>
+              <Link onClick={()=>{
+                emptySearch();
+                getUserCart();
+              }} href="/cart" className="flex items-center text-black text-2xl hover:cursor-pointer relative" ><GrCart/>
              <span className=" w-[20px] h-[20px] text-center rounded-full text-black absolute top-[-12px] right-[-8px] text-base bg-orange-400">
               {cart.length}</span>
 
