@@ -31,7 +31,6 @@ function CoursesSection() {
     const getAllCourses = async () => {
       try {
             const response = await CoursesApis.AllCourses(lang);
-//        console.log(response?.data?.data);
                 setAllCourses(response?.data?.data)
                    localStorage.setItem("allCourses",JSON.stringify(response?.data?.data))              
                     } catch (error) {
