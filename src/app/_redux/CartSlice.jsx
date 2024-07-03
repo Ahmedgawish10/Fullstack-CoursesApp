@@ -8,7 +8,6 @@ const clone=[]
 export const addToCart = createAsyncThunk( 'cart/addToCart',
   async (payload, thunkAPI) => {
     try {
-//        console.log(payload);      
         const response = await CartApis.addToCart(payload); 
          return response.data; 
     } catch (error) {
