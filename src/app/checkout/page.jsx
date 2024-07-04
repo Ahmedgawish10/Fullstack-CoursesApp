@@ -5,6 +5,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from './CheckoutForm';
 import { useSearchParams } from 'next/navigation'; // Ensure correct import based on your project setup
+import { Suspense } from 'react'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY);
 
@@ -26,9 +27,13 @@ const Checkout = () => {
   };
 
   return (
+    <Suspense>
+
     <Elements stripe={stripePromise} options={options}>
       <CheckoutForm totalAmount={totalAmount} />
     </Elements>
+      </Suspense>
+
   );
 };
 
