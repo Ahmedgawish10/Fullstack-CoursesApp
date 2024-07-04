@@ -4,19 +4,13 @@ import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY);
 import CheckoutForm from "./CheckoutForm";
+import { useSearchParams } from 'next/navigation'
 
 const Checkout = () => {
-   const url = window.location.href;
-    console.log(url);
-    const getsSlectedUrl=  url?.split("?")
-    const totalAmount = getsSlectedUrl.find(param => param.startsWith('totalAmount=')).split('=')[1];
-
-    
-    
-    
-    
-    
-    
+ const searchParams = useSearchParams()
+ 
+  const searchParam = searchParams.get('totalAmount')
+    let totalAmount=Number(searchParam)
       const options = {
           mode:'payment',
           currency:'usd',
@@ -24,11 +18,9 @@ const Checkout = () => {
 
   };
   return (
-
   <Elements stripe={stripePromise} options={options}>
       <CheckoutForm totalAmount={totalAmount}/>
-    </Elements>  
-    
+    </Elements>      
 
  
   );
