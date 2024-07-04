@@ -1,39 +1,34 @@
 "use client"
-// Import necessary dependencies
-import React, { useEffect, useState } from 'react';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import CheckoutForm from './CheckoutForm';
-import { useSearchParams } from 'next/navigation'; // Ensure correct import based on your project setup
-import { Suspense } from 'react'
-
+import React from 'react';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY);
+import CheckoutForm from "./CheckoutForm";
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const Checkout = () => {
-  const [totalAmount, setTotalAmount] = useState(0);
-  const searchParams = useSearchParams(); // Retrieve search parameters
+ const searchParams = useSearchParams()
+  const x = useRouter()
 
-  useEffect(() => {
-    const searchParam = searchParams.get('totalAmount');
-    if (searchParam) {
-      setTotalAmount(Number(searchParam));
-    }
-  }, [searchParams]);
+  const searchParam = searchParams.get('totalAmount')
+    let totalAmount=Number(searchParam)
+      const options = {
+          mode:'payment',
+          currency:'usd',
+          amount:+`${+totalAmount*100}`,
 
-  const options = {
-    mode: 'payment', // Ensure mode is set to 'payment'
-    currency: 'usd',
-    amount: totalAmount > 0 ? totalAmount * 100 : 100, // Ensure amount is greater than 0, default to 100 cents if totalAmount is invalid
   };
-
   return (
-    <Suspense>
+          <React.Suspense fallback={<div>Loading...</div>}>
 
-    <Elements stripe={stripePromise} options={options}>
-      <CheckoutForm totalAmount={totalAmount} />
-    </Elements>
-      </Suspense>
+  <Elements stripe={stripePromise} options={options}>
+      <CheckoutForm totalAmount={totalAmount}/>
+    </Elements>  
+        </React.Suspense>
+    
 
+ 
   );
 };
 
