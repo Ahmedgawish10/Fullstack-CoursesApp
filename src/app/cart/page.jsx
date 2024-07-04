@@ -170,10 +170,13 @@ const calculateDiscountSubtotal = () => {
                       </div>
 
                       <div className="flex justify-end">
-                        <div onClick={() => router.push(`/checkout?totalAmount=${subtotalDiscount}`)}
+                        <div 
                           className="cursor-pointer block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600 "
                         >
-                          Checkout
+                         <a href={`/checkout?totalAmount=${subtotalDiscount}`}>
+                             Checkout
+                         </a>
+                          
                         </div>
                       </div>
                     </div>
