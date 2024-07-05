@@ -3,7 +3,7 @@
 import React from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { useSearchParams } from 'next/navigation';
+//import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react'; // Assuming 'next/client' is the correct import for Suspense in Next.js
 import CheckoutForm from "./CheckoutForm";
 
@@ -11,16 +11,13 @@ import CheckoutForm from "./CheckoutForm";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY);
 
 const Checkout = () => {
-  // Fetch totalAmount from query params using useSearchParams hook
-  const searchParams = useSearchParams();
-  const searchParam = searchParams.get('totalAmount');
-  let totalAmount = Number(searchParam);
-
-  // Options for Elements component
+//  const searchParams = useSearchParams();
+//  const searchParam = searchParams.get('totalAmount');
+  let totalAmount =20;
   const options = {
     mode: 'payment',
     currency: 'usd',
-    amount: totalAmount * 100, // Amount should be in cents
+    amount: 20 * 100, 
   };
 
   return (
