@@ -105,7 +105,7 @@ const CheckoutForm = ({totalAmount}) => {
     <form onSubmit={handleSubmit}>
      <div className="w-[90%] mx-auto mt-[3rem] xl:w-[70%]">
            <PaymentElement />
-          <button className="bg-black text-white border rounded px-4 py-2 mt-5">Submit</button>
+          <button className="bg-black text-white border rounded px-4 py-2 mt-5">Pay</button>
      </div>
     </form>
   );

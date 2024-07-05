@@ -1,29 +1,20 @@
 "use client"
+// Import statements at the beginning
 import React from 'react';
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY);
-import CheckoutForm from "./CheckoutForm";
-import { useSearchParams } from 'next/navigation'
+import AccepetPayment from "./AccepetPayment"
 
-const Checkout = () => {
- const searchParams = useSearchParams()
- 
-  const searchParam = searchParams.get('totalAmount')
-    let totalAmount=Number(searchParam)
-      const options = {
-          mode:'payment',
-          currency:'usd',
-          amount:+`${+totalAmount*100}`,
+import { Suspense } from 'react'; // Assuming 'next/client' is the correct import for Suspense in Next.js
 
-  };
+const CheckoutAccepts = () => {
+  
+
   return (
-  <Elements stripe={stripePromise} options={options}>
-      <CheckoutForm totalAmount={totalAmount}/>
-    </Elements>      
+      <Suspense fallback={<div>Loading...</div>}>
+              <AccepetPayment/>
 
- 
+      </Suspense>
+
   );
 };
 
-export default Checkout;
+export default CheckoutAccepts;
