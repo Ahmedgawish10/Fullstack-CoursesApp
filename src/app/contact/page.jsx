@@ -89,15 +89,15 @@ export default function ContactUs() {
     
   return (
     <div className="container w-[90%] mx-auto">
-      <div className="row">
+      <div className="">
         <h1 >Contact Us</h1>
       </div>
-      <div className="row">
+      <div className="">
         <h4 style={{ textAlign: 'center' }}>We'd love to hear from you!</h4>
       </div>
-      <div className="row input-container mt-0">
+      <div className=" input-container mt-0">
        <form onSubmit={handleSubmit} >
-        <div className="col-xs-12"> 
+        <div className=""> 
           <div className="styled-input wide">
          <input type="text" name="name" className="contact__input-name"  
           value={formData.name}
@@ -105,15 +105,15 @@ export default function ContactUs() {
             <label>Name</label>
           </div>
         </div>
-        <div className="flex sm:flex-wrap md:flex md:w-[100%] col-md-6  col-sm-12 ">
-                <div className="col-md-6 text-success col-sm-12">
-          <div className="styled-input">
-              <input type="text" name="email"  value={formData.email}
+        <div className="flex flex-wrap  md:flex gap-5 justify-between sm:w-[100%] ">
+                <div className=" contact-email text-success sm:w-[100%] ">
+          <div className="styled-input ">
+              <input type="text"  name="email"  value={formData.email}
                            onChange={handleChange} required/>
             <label>Email</label>
           </div>
         </div>
-        <div className="col-md-6 col-sm-12">
+        <div className="contact-phone sm:w-[100%]">
           <div className="styled-input" >
             <input type="text"  required/>
             <label>Phone Number</label>
@@ -121,7 +121,7 @@ export default function ContactUs() {
         </div>
         </div>
     
-        <div className="col-xs-12">
+        <div className="">
           <div className="styled-input wide">
      <textarea name="msg"  cols="10" rows="1" className="contact__textarea"
                         value={formData.msg}
@@ -129,7 +129,7 @@ export default function ContactUs() {
                              <label>Message</label>
           </div>
         </div>
-        <div className="col-xs-12">
+        <div className="h-[50px]">
           <button type="submit" className="btn-lrg submit-btn">Send Message</button>
         </div>
         
