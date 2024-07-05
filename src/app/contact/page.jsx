@@ -105,7 +105,8 @@ export default function ContactUs() {
             <label>Name</label>
           </div>
         </div>
-        <div className="col-md-6 col-sm-12">
+        <div className="flex sm:flex-wrap md:flex md:w-[100%] col-md-6  col-sm-12 ">
+                <div className="col-md-6 text-success col-sm-12">
           <div className="styled-input">
               <input type="text" name="email"  value={formData.email}
                            onChange={handleChange} required/>
@@ -113,11 +114,13 @@ export default function ContactUs() {
           </div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <div className="styled-input" style={{ float: 'right' }}>
+          <div className="styled-input" >
             <input type="text"  required/>
             <label>Phone Number</label>
           </div>
         </div>
+        </div>
+    
         <div className="col-xs-12">
           <div className="styled-input wide">
      <textarea name="msg"  cols="10" rows="1" className="contact__textarea"
