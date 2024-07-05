@@ -52,7 +52,7 @@ const CheckoutForm = ({totalAmount}) => {
 			clientSecret,
 			elements,
 			confirmParams: {
-				return_url: "http://localhost:3000/payment-success",
+				return_url: "https://fullstack-courses-app-3vdz-3c6vmh0y4-ahmedgawish.vercel.app/payment-success",
 			},
 		});
 
