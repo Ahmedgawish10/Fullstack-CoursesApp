@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import { IoIosEye, IoMdCart } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
@@ -8,12 +8,9 @@ import { ImFire } from "react-icons/im";
 import { TbCategory2 } from "react-icons/tb";
 import { RiStarSLine } from "react-icons/ri";
 import Image from 'next/image';
-import CoursesApis from "../_Utils/CoursesApis";
-import CartApis from "../_Utils/CartApis";
 import { useUser } from '@clerk/nextjs';
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart } from "../_redux/CartSlice";
-import { getcount } from "../_redux/CartSlice";
 import { toast } from 'react-hot-toast';
 
 function CardCourse({ allCourses }) {
@@ -26,26 +23,26 @@ function CardCourse({ allCourses }) {
     router.push(`/course-details/${productId}`);
   };
 
-  const handleAddToCart = (course) => {   
+  const handleAddToCart = (course) => {
     const existingItem = cart.find(myCourse => myCourse.attributes.courseId === course?.id);
     if (existingItem) {
-   toast.loading(`Your ${course?.attributes?.title} already in Cart`,{duration:2000}); 
+      toast.loading(`Your ${course?.attributes?.title} already in Cart`, { duration: 2000 });
     } else {
-       if(user){
-   toast.success(`Your ${course?.attributes?.title} added to Cart`); 
-      const addToCartData = {
-        data: {
-          userName: user.fullName,
-          email: user.primaryEmailAddress.emailAddress,
-          courses: [course?.id],
-          courseId: course?.id
-        }
-      };
-      dispatch(addToCart(addToCartData));
-}else{
-   toast.error(`Your Are not Logged in`); 
-    return null;
-}
+      if (user) {
+        toast.success(`Your ${course?.attributes?.title} added to Cart`);
+        const addToCartData = {
+          data: {
+            userName: user.fullName,
+            email: user.primaryEmailAddress.emailAddress,
+            courses: [course?.id],
+            courseId: course?.id
+          }
+        };
+        dispatch(addToCart(addToCartData));
+      } else {
+        toast.error(`Your Are not Logged in`);
+        return null;
+      }
     }
   };
 
@@ -53,7 +50,6 @@ function CardCourse({ allCourses }) {
     <div className="card_courses grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 p-2 container_courses" >
       {allCourses.map((course) => (
         <div className="card_box p-2 border border-[#33dd9f]" key={course.id} >
-          {/* course image */}
           <div className="img">
             <div className="course-overlay flex-col">
               <div className="flex items-center">
@@ -92,11 +88,9 @@ function CardCourse({ allCourses }) {
             />
           </div>
           <div className="content hover:cursor-pointer" onClick={() => { handleClick(course.id) }}>
-            {/* title course */}
             <div className="course_name ps-2 pt-3 line-clamp-1">
               {course?.attributes?.title}
             </div>
-            {/* category */}
             <div className="course_category flex justify-between items-center gap-2 ps-2 pe-2 text-xs">
               <div className="left flex items-center gap-2 pt-1 pb-1 text-gray-500">
                 <p><TbCategory2 /></p>
@@ -104,13 +98,12 @@ function CardCourse({ allCourses }) {
               </div>
               <div className="right ps-e text-black-800">
                 <div className="bg-green-300 p-1 ">
-                  {course.attributes.discount ? course.attributes.discount + '%' : ""} 
+                  {course.attributes.discount ? course.attributes.discount + '%' : ""}
                   <span>free</span>
                 </div>
               </div>
             </div>
             <div className="text-gray-500 text-xs ps-2 owner-course mb-1">{course?.attributes?.Author}</div>
-            {/* ratings */}
             <div className="ratings flex justify-between items-center gap-2 ps-2 pe-2 text-xs pb-5">
               <span className="icons flex items-center gap-1">
                 {course?.attributes?.rating >= 4 ? (

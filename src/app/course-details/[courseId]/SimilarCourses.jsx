@@ -7,18 +7,17 @@ import { TbCategory2 } from "react-icons/tb";
 import { RiStarSLine } from "react-icons/ri";
 import Image from 'next/image';
 
-function SimilarCourses({similarCourses}) {
-   console.log(similarCourses)
+function SimilarCourses({ similarCourses }) {
+  const router = useRouter();
 
-    const handleClick = (productId) => {
-        router.push(`/course-details/${productId}`);
-      };
+  const handleClick = (productId) => {
+    router.push(`/course-details/${productId}`);
+  };
+
   return (
-    <div className='card_courses grid grid-cols-1  md:grid-cols-2 gap-3 p-2 container_courses pb-[5rem]'> 
-           
-     {similarCourses.map((course) => (
+    <div className='card_courses grid grid-cols-1  md:grid-cols-2 gap-3 p-2 container_courses pb-[5rem]'>
+      {similarCourses.map((course) => (
         <div className="card_box p-2 border border-[#33dd9f]" key={course.id}>
-          {/* course image */}
           <div className="img">
             <div className="course-overlay flex-col">
               <div className="flex items-center">
@@ -57,11 +56,9 @@ function SimilarCourses({similarCourses}) {
             />
           </div>
           <div className="content hover:cursor-pointer" onClick={() => { handleClick(course.id) }}>
-            {/* title course */}
             <div className="course_name ps-2 pt-3 line-clamp-1">
               {course?.attributes?.title}
             </div>
-            {/* category */}
             <div className="course_category flex justify-between items-center gap-2 ps-2 pe-2 text-xs">
               <div className="left flex items-center gap-2 pt-1 pb-1 text-gray-500">
                 <p><TbCategory2 /></p>
@@ -69,13 +66,12 @@ function SimilarCourses({similarCourses}) {
               </div>
               <div className="right ps-e text-black-800">
                 <div className="bg-green-300 p-1 ">
-                  {course.attributes.discount ? course.attributes.discount + '%' : ""} 
+                  {course.attributes.discount ? course.attributes.discount + '%' : ""}
                   <span>free</span>
                 </div>
               </div>
             </div>
             <div className="text-gray-500 text-xs ps-2 owner-course mb-1">{course?.attributes?.Author}</div>
-            {/* ratings */}
             <div className="ratings flex justify-between items-center gap-2 ps-2 pe-2 text-xs pb-5">
               <span className="icons flex items-center gap-1">
                 {course?.attributes?.rating >= 4 ? (
@@ -97,7 +93,8 @@ function SimilarCourses({similarCourses}) {
             </div>
           </div>
         </div>
-      ))}      </div>
+      ))}
+    </div>
   )
 }
 

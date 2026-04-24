@@ -1,4 +1,4 @@
-"use client" 
+"use client"
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart } from "../_redux/CartSlice";
@@ -8,8 +8,7 @@ import "./style_cart.css";
 import { useRouter } from 'next/navigation'
 
 const Cart = () => {
-          const router = useRouter()
-
+  const router = useRouter()
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +20,7 @@ const Cart = () => {
   const fetchData = () => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 3000); 
+    }, 3000);
   };
 
   const deleteCourseCart = (id) => {
@@ -29,33 +28,28 @@ const Cart = () => {
     dispatch(removeFromCart(id));
   };
 
-  // Calculate subtotal, discount, and total
   const calculateSubtotal = () => {
     let subtotal = 0;
     cart.forEach(item => {
-//        console.log(item?.attributes?.courses?.data[0]?.attributes);
-      subtotal += item?.attributes?.courses?.data[0]?.attributes?.price; 
+      subtotal += item?.attributes?.courses?.data[0]?.attributes?.price;
     });
     return subtotal;
   };
-const calculateDiscountSubtotal = () => {
+
+  const calculateDiscountSubtotal = () => {
     let totalDiscountedPrice = 0;
     cart.forEach(item => {
-        const price = item?.attributes?.courses?.data[0]?.attributes?.price;
-        const discountPercentage = item?.attributes?.courses?.data[0]?.attributes?.discount;
-
-        const discountDecimal = discountPercentage / 100;
-        const discountedPrice = price * (1 - discountDecimal);
-
-        totalDiscountedPrice += discountedPrice;
+      const price = item?.attributes?.courses?.data[0]?.attributes?.price;
+      const discountPercentage = item?.attributes?.courses?.data[0]?.attributes?.discount;
+      const discountDecimal = discountPercentage / 100;
+      const discountedPrice = price * (1 - discountDecimal);
+      totalDiscountedPrice += discountedPrice;
     });
-    return totalDiscountedPrice.toFixed(2); 
-};
+    return totalDiscountedPrice.toFixed(2);
+  };
 
-    
-                    
   const subtotal = calculateSubtotal();
-  const  subtotalDiscount= calculateDiscountSubtotal();
+  const subtotalDiscount = calculateDiscountSubtotal();
 
   return (
     <div className='flex flex-col loading'>
@@ -68,9 +62,9 @@ const calculateDiscountSubtotal = () => {
           <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
             <div className="mx-auto max-w-3xl">
               <header className="text-center">
- {cart.length > 0 && (
-            <h1 className="text-xl font-bold text-gray-900 sm:text-3xl">Your Cart</h1>
-          )}
+                {cart.length > 0 && (
+                  <h1 className="text-xl font-bold text-gray-900 sm:text-3xl">Your Cart</h1>
+                )}
               </header>
 
               <div className="mt-8 section-cartitems">
@@ -95,7 +89,7 @@ const calculateDiscountSubtotal = () => {
 
                             <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
                               <div>
-                                <dt className="inline">Category: {item?.attributes?.courses?.data[0]?.attributes?.category}</dt><br/>
+                                <dt className="inline">Category: {item?.attributes?.courses?.data[0]?.attributes?.category}</dt><br />
                                 <dd className="inline">Discount: %{item?.attributes?.courses?.data[0]?.attributes?.discount}</dd>
                               </div>
 
@@ -146,7 +140,6 @@ const calculateDiscountSubtotal = () => {
                           <dt>Subtotal After Discount</dt>
                           <dd>£{subtotalDiscount}</dd>
                         </div>
-
                       </dl>
 
                       <div className="flex justify-end">
@@ -170,13 +163,12 @@ const calculateDiscountSubtotal = () => {
                       </div>
 
                       <div className="flex justify-end">
-                        <div 
+                        <div
                           className="cursor-pointer block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600 "
                         >
-                         <a href={`/checkout?totalAmount=${subtotalDiscount}`}>
-                             Checkout
-                         </a>
-                          
+                          <a href={`/checkout?totalAmount=${subtotalDiscount}`}>
+                            Checkout
+                          </a>
                         </div>
                       </div>
                     </div>

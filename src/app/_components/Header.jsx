@@ -4,19 +4,16 @@ import { TiThMenu } from "react-icons/ti";
 import { RiCloseFill } from "react-icons/ri";
 import { UserButton } from "@clerk/nextjs";
 import { GrCart } from "react-icons/gr";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaSearch } from "react-icons/fa";
 import { getcount } from "../_redux/CartSlice";
-import { FaSearch } from "react-icons/fa";
 import { MdOndemandVideo } from "react-icons/md";
-import { useClerk } from '@clerk/nextjs';
 import { useUser } from '@clerk/nextjs';
 import { useAuth } from '@clerk/clerk-react';
 import { useSelector, useDispatch } from 'react-redux'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link';
 import CartApis from "../_Utils/CartApis";
 import SearchCourse from "./SearchCourse";
-
 import "./style.css"
 
 function Header() {
@@ -26,44 +23,30 @@ function Header() {
   const [courseName, setCourseName] = useState("");
 
   const { isLoaded, isSignedIn } = useAuth();
-  const s = useRouter();
   const p = usePathname();
-
   const { user } = useUser();
-  const { sinIn } = useClerk();
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    // console.log(user)
   };
 
-  //    console.log("d",cart);
   useEffect(() => {
     user && getUserCart();
   }, [user])
 
   const getUserCart = () => {
-    CartApis.getCart(user.primaryEmailAddress.emailAddress).then((res) => dispatch(getcount(res.data.data))
-
-    )
-
+    CartApis.getCart(user.primaryEmailAddress.emailAddress).then((res) => dispatch(getcount(res.data.data)))
   }
 
-  //search
   function onCourseNameChange(e) {
     setCourseName(e.target.value)
-
-
   }
-  //empty search
+
   function emptySearch() {
     setCourseName("");
   }
 
-
-
   return (
-
-
     !(p == "/sign-up" || p == "/sign-in") ? (
       <header className="bg-white h-[64px] w-[100%] sticky top-0 z-20 shadow-bottom ">
         <div className="cont  w-[90%] m-auto  z-10">
@@ -80,21 +63,16 @@ function Header() {
                 <ul className="flex items-center gap-6 text-sm">
                   <li>
                     <Link className="text-[#130f40] transition hover:text-black" href="/" onClick={emptySearch}> Home </Link>
-
                   </li>
-
                   <li>
                     <Link className="text-[#130f40] transition hover:text-black" href="/courses" onClick={emptySearch}> Explore </Link>
                   </li>
-
                   <li>
                     <Link className="text-[#130f40] transition hover:text-black" href="/#courses" onClick={emptySearch}> Courses </Link>
                   </li>
-
                   <li>
                     <Link className="text-[#130f40] transition hover:text-black" href="#" onClick={emptySearch}> About Us </Link>
                   </li>
-
                   <li>
                     <Link className="text-[#130f40] transition hover:text-black" href="/contact" onClick={emptySearch}> Contact Us </Link>
                   </li>
@@ -105,7 +83,6 @@ function Header() {
                         placeholder="Course Name..." onChange={onCourseNameChange} />
                     </div>
                   </li>
-
                 </ul>
               </nav>
             </div>
@@ -137,16 +114,13 @@ function Header() {
                     </>
                   ) : (
                     <>
-                      <Link onClick={emptySearch} href="/wishlist" className="flex items-center text-black text-2xl hover:cursor-pointer"><FaRegHeart />
-
-                      </Link>
+                      <Link onClick={emptySearch} href="/wishlist" className="flex items-center text-black text-2xl hover:cursor-pointer"><FaRegHeart /></Link>
                       <Link onClick={() => {
                         emptySearch();
                         getUserCart();
                       }} href="/cart" className="flex items-center text-black text-2xl hover:cursor-pointer relative" ><GrCart />
                         <span className=" w-[20px] h-[20px] text-center rounded-full text-black absolute top-[-12px] right-[-8px] text-base bg-orange-400">
                           {cart.length}</span>
-
                       </Link>
                       <UserButton />
                     </>
@@ -173,9 +147,6 @@ function Header() {
       </header>
     ) :
       ""
-
-
-
   )
 }
 
