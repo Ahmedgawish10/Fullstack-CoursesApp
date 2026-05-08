@@ -268,7 +268,7 @@ function AboutCourse({ SingleCourseDetails }) {
         </div>
       ) : (
         <div className="mt-10">
-          <Skeleton />
+          <Skeleton variant="detail" />
         </div>
       )}
     </div>

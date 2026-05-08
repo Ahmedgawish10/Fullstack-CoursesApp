@@ -267,7 +267,7 @@ export default function BecomeInstructorPage() {
               </div>
 
               <button type="submit" className="contact-submit-btn" disabled={isSubmitting}>
-                {isSubmitting ? "Sending…" : "Submit instructor application"}
+                {isSubmitting ? "Sending…" : "Submit Application"}
               </button>
             </form>
           </div>

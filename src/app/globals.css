@@ -156,41 +156,46 @@ body {
   
   }
 } 
-/* skelton animation */
-.skeleton {
-  background: linear-gradient(90deg, #f0f0f0, #e0e0e0, #f0f0f0);
-  background-size: 200% 100%;
-  animation: skeleton-loading 1.5s infinite linear;
+/* Skeleton loading */
+:root {
+  --skeleton-base: #f1f5f9;
+  --skeleton-mid: #e8eef5;
+  --skeleton-shine: #ffffff;
 }
 
-@keyframes skeleton-loading {
+.skeleton {
+  background: linear-gradient(
+    105deg,
+    var(--skeleton-base) 0%,
+    var(--skeleton-mid) 42%,
+    var(--skeleton-shine) 50%,
+    var(--skeleton-mid) 58%,
+    var(--skeleton-base) 100%
+  );
+  background-size: 220% 100%;
+  animation: skeleton-shimmer 1.35s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
   0% {
-    background-position: 200% 0;
+    background-position: 100% 0;
   }
   100% {
-    background-position: -200% 0;
+    background-position: -100% 0;
   }
 }
 
-.skeleton-media{
-  display:grid;
-  grid-template-columns: repeat(1, minmax(150px, 1fr));
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: var(--skeleton-base);
   }
-  @media screen and (min-width: 640px) and (max-width: 768px) {
-    .skeleton-media{
-    grid-template-columns: repeat(3, minmax(120px, 1fr));
-    }
-  }
-  @media screen and (min-width: 768px) {
-    .skeleton-media{
-    grid-template-columns: repeat(4, minmax(150px, 1fr));
-    }
-  }
-  @media screen and (min-width: 992px) {
-    .skeleton-media{
-    grid-template-columns: repeat(4, minmax(150px, 1fr));
-    }
-  }
+}
+
+.course-card-skeleton {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.05), 0 1px 3px rgb(15 23 42 / 0.08);
+}
 /* start not found page stylr*/
 
 

@@ -1,17 +1,81 @@
-"use client";
+import type { Metadata, Viewport } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import Header from "./_components/Header";
-import Footer from "./_components/Footer";
-import Scrollup from './scrollup/Scrollup';
-import { Provider } from "react-redux";
-import store from "./_redux/store";
-import React from 'react'
-import { Toaster } from 'react-hot-toast';
-import NextTopLoader from 'nextjs-toploader';
-import { ClerkProvider } from "@clerk/nextjs";
+import React from "react";
+import ClientProviders from "./ClientProviders";
 
-const inter = Roboto({ subsets: ["latin"], weight: "700" });
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+  "http://localhost:3000";
+
+const roboto = Roboto({ subsets: ["latin"], weight: "700" });
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Courses App — Online Learning",
+    template: "%s | Courses App",
+  },
+  description:
+    "Browse online courses, learn new skills, and study at your own pace. Enroll, save favorites, and checkout securely.",
+  applicationName: "Courses App",
+  authors: [{ name: "Courses App" }],
+  keywords: [
+    "online courses",
+    "learning",
+    "education",
+    "e-learning",
+    "video courses",
+  ],
+  creator: "Courses App",
+  publisher: "Courses App",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    siteName: "Courses App",
+    title: "Courses App — Online Learning",
+    description:
+      "Browse online courses and learn at your own pace. Explore topics, wishlists, and secure checkout.",
+    images: [
+      {
+        url: "/courses-logo2.png",
+        alt: "Courses App — Online Learning",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Courses App — Online Learning",
+    description:
+      "Browse online courses and learn at your own pace.",
+    images: ["/courses-logo2.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  icons: {
+    icon: "/courses-logo2.png",
+    shortcut: "/courses-logo2.png",
+    apple: "/courses-logo2.png",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#130f40",
+};
 
 export default function RootLayout({
   children,
@@ -19,23 +83,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <Provider store={store}>
-        <html lang="en">
-          <body className={inter.className} suppressHydrationWarning={true}>
-            <NextTopLoader color="#FFB800" showSpinner={false} />
-            <Toaster position="top-right" />
-            <div className="flex flex-col min-h-screen w-full">
-              <Header />
-              <main className="flex-1 w-full mx-auto">
-                {children}
-              </main>
-              <Footer />
-              <Scrollup />
-            </div>
-          </body>
-        </html>
-      </Provider>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={roboto.className} suppressHydrationWarning={true}>
+        <ClientProviders>{children}</ClientProviders>
+      </body>
+    </html>
   );
 }

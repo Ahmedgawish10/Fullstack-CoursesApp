@@ -12,11 +12,9 @@ function CoursesSection() {
   const [allCourses, setAllCourses] = useState([]);
 
   useEffect(() => {
-    console.log(process.env.NEXT_PUBLIC_BASE_API_URL);
     const getAllCourses = async () => {
       try {
         const response = await CoursesApis.AllCourses(lang);
-        console.log(response);
         setAllCourses(response?.data?.data)
         localStorage.setItem("allCourses", JSON.stringify(response?.data?.data))
       } catch (error) {
@@ -41,7 +39,11 @@ function CoursesSection() {
         ) : null}
       </div>
       {allCourses.length === 0 ? (
-        <div className="skeleton-media mt-4 grid gap-3" aria-live="polite" aria-busy="true">
+        <div
+          className="card_courses container_courses mt-4 grid grid-cols-1 gap-5 p-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          aria-live="polite"
+          aria-busy="true"
+        >
           <Skeleton />
           <Skeleton />
           <Skeleton />

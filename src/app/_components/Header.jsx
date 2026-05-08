@@ -108,16 +108,18 @@ function Header() {
                 ) : (
                   !isSignedIn ? (
                     <>
-                      <Link onClick={emptySearch}
-                        className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                      <Link
+                        onClick={emptySearch}
                         href="/sign-in"
+                        className="header-auth-btn header-auth-btn--login inline-flex min-h-[40px] items-center justify-center rounded-lg bg-[#130f40] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#130f40]/20 ring-1 ring-white/10 transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a1760] hover:shadow-lg hover:shadow-[#130f40]/30 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#130f40]"
                       >
                         Login
                       </Link>
-                      <div className="hidden sm:flex register">
-                        <Link onClick={emptySearch}
-                          className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 register-text"
+                      <div className="register hidden sm:flex">
+                        <Link
+                          onClick={emptySearch}
                           href="/sign-up"
+                          className="header-auth-btn header-auth-btn--register register-text inline-flex min-h-[40px] items-center justify-center rounded-lg border-2 border-[#130f40] bg-white px-5 py-2.5 text-sm font-semibold text-[#130f40] shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-[#130f40] hover:text-white hover:shadow-md active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#130f40]"
                         >
                           Register
                         </Link>
