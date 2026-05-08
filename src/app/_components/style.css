@@ -9,7 +9,6 @@
       border-top-left-radius: 12px;
       width: 100% !important;
       height: 220px !important ;
-      object-fit: cover;
   
   }
   .img {
@@ -132,6 +131,59 @@
   
   /*start style footer*/
   /*--------------------------footer-------------------*/
+  .footer {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background-color: #0d1117;
+    background-image:
+      radial-gradient(ellipse 140% 90% at 50% -30%, rgba(16, 185, 129, 0.18), transparent 55%),
+      radial-gradient(ellipse 70% 50% at 100% 110%, rgba(255, 184, 0, 0.1), transparent 50%),
+      radial-gradient(ellipse 55% 45% at 0% 100%, rgba(59, 130, 246, 0.08), transparent 45%),
+      linear-gradient(
+        185deg,
+        #1e293b 0%,
+        #141a22 38%,
+        #0f1419 72%,
+        #0a0e12 100%
+      );
+  }
+  .footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 50% 120%,
+      rgba(16, 185, 129, 0.06),
+      transparent 55%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  .footer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(16, 185, 129, 0.35) 25%,
+      rgba(255, 184, 0, 0.55) 50%,
+      rgba(16, 185, 129, 0.35) 75%,
+      transparent 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+  }
+  .footer > .part-two-footer,
+  .footer > .hero-footer1 {
+    position: relative;
+    z-index: 1;
+  }
+
   .footer-up{
       background: #212121;
       color: white;
@@ -176,7 +228,8 @@
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
           padding-top: 20px;
-          border-bottom: 1px solid hsl(0, 0%, 26%);
+          border-bottom: 1px solid rgba(16, 185, 129, 0.12);
+          box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.04);
           padding-bottom: 60px;
           gap: 15px; 
   
@@ -291,13 +344,13 @@
           gap: 10px;
           padding-bottom: 50px;
           padding-top: 20px;
-          background-color: #212121;
+          background-color: transparent;
   }
   .hero-footer1{
-      background-color: #212121;
+      background-color: transparent;
   }
   .part-two-footer{
-     background-color: #212121;
+     background-color: transparent;
   }
   .hero-footer .left{
   font-style: normal;

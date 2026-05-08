@@ -1,159 +1,114 @@
 "use client";
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
-import { IoIosEye, IoMdCart } from "react-icons/io";
-import { FaRegHeart } from "react-icons/fa";
-import { ImFire } from "react-icons/im";
-import { TbCategory2 } from "react-icons/tb";
-import { RiStarSLine } from "react-icons/ri";
-import Image from 'next/image';
+import React from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useAddToWishlist } from "../../_hooks/useAddToWishlist";
-import { useAddToCart } from "../../_hooks/useAddToCart";
 
 function SimilarCourses({ similarCourses }) {
   const router = useRouter();
   const handleAddToWishlist = useAddToWishlist();
-  const handleAddToCart = useAddToCart();
 
   const handleViewCourse = (productId) => {
     router.push(`/course-details/${productId}`);
   };
 
+  const formatRating = (r) => {
+    if (r == null) return "—";
+    return typeof r === "number" && r % 1 === 0 ? `${r}.0` : String(r);
+  };
+
   if (!similarCourses?.length) {
     return (
-      <p className="mt-4 text-sm text-slate-500" role="status">
+      <p className="mt-2 text-cde-label-sm text-cde-on-surface-variant" role="status">
         No similar courses to show yet.
       </p>
     );
   }
 
   return (
-    <div className="card_courses container_courses mt-4 grid grid-cols-1 gap-5 p-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div className="mt-4 grid grid-cols-1 gap-cde-gutter sm:grid-cols-2 lg:grid-cols-4">
       {similarCourses.map((course) => (
         <article
-          className="card_box overflow-hidden rounded-xl border border-emerald-200 bg-white/90 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus-within:ring-2 focus-within:ring-emerald-500/70"
+          className="group overflow-hidden rounded-xl border border-cde-outline-variant bg-white transition-all hover:shadow-lg"
           key={course.id}
         >
-          <div className="img">
-            <div className="course-overlay flex-col gap-4">
-              <div className="flex items-center">
-                <button
-                  type="button"
-                  className="rounded-full p-1 text-2xl text-white transition-colors hover:text-fuchsia-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                  aria-label={`Add ${course?.attributes?.title ?? 'course'} to wishlist`}
-                  onClick={() => handleAddToWishlist(course)}
-                >
-                  <FaRegHeart className="heart" aria-hidden="true" />
-                </button>
-                <button
-                  type="button"
-                  className="rounded-full p-1 text-3xl text-white transition-colors hover:text-fuchsia-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                  aria-label={`Preview ${course?.attributes?.title ?? 'course'}`}
-                  onClick={() => handleViewCourse(course.id)}
-                >
-                  <IoIosEye className="eye" aria-hidden="true" />
-                </button>
-              </div>
-              {course.attributes.discount ? (
-                <button
-                  className="button-85 mt-2 flex items-center"
-                  type="button"
-                  onClick={() => handleAddToCart(course)}
-                >
-                  <span>
-                    <IoMdCart className="me-2 text-2xl" aria-hidden="true" />
-                  </span>
-                  <span>Add to Cart</span>
-                </button>
-              ) : (
-                <button
-                  className="button-85 mt-2 flex items-center"
-                  type="button"
-                  onClick={() => handleViewCourse(course.id)}
-                >
-                  <span>
-                    <ImFire className="me-2 text-2xl" aria-hidden="true" />
-                  </span>
-                  <span>Free Now</span>
-                </button>
-              )}
-            </div>
-            <button
-              type="button"
-              className="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
-              aria-label={`Go to ${course?.attributes?.title ?? 'course'} details`}
-              onClick={() => handleViewCourse(course.id)}
-            >
-              {course?.attributes?.images?.data?.[0]?.attributes?.url ? (
-                <Image
-                  src={course.attributes.images.data[0].attributes.url}
-                  width={200}
-                  height={300}
-                  className="h-[220px] w-full object-cover transition duration-500 hover:scale-110"
-                  alt={course?.attributes?.title ?? 'Course image'}
-                />
-              ) : (
-                <div className="flex h-[220px] w-full items-center justify-center bg-neutral-200 text-sm text-neutral-500">
-                  No image
-                </div>
-              )}
-            </button>
-          </div>
-          <div
-            className="content cursor-pointer p-3"
+          <button
+            type="button"
+            className="relative block h-40 w-full overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cde-primary"
             onClick={() => handleViewCourse(course.id)}
+            aria-label={`Open ${course?.attributes?.title ?? "course"}`}
           >
-            <h4 className="course_name line-clamp-2 text-base font-semibold text-slate-900">
+            {course?.attributes?.images?.data?.[0]?.attributes?.url ? (
+              <Image
+                src={course.attributes.images.data[0].attributes.url}
+                width={400}
+                height={220}
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                alt={course?.attributes?.title ?? "Course image"}
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-cde-surface-container text-cde-label-sm text-cde-on-surface-variant">
+                No image
+              </div>
+            )}
+            <span
+              role="button"
+              tabIndex={-1}
+              className="absolute right-2 top-2 inline-flex size-9 items-center justify-center rounded-full bg-white/90 text-cde-primary shadow-sm backdrop-blur-sm transition hover:bg-white"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleAddToWishlist(course);
+              }}
+              onKeyDown={(e) => e.stopPropagation()}
+              aria-label={`Add ${course?.attributes?.title ?? "course"} to wishlist`}
+            >
+              <span className="material-symbols-outlined text-xl">favorite</span>
+            </span>
+          </button>
+          <div
+            className="cursor-pointer space-y-2 p-4"
+            onClick={() => handleViewCourse(course.id)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleViewCourse(course.id);
+              }
+            }}
+            role="link"
+            tabIndex={0}
+          >
+            <h3 className="line-clamp-1 text-cde-title-md text-cde-on-surface">
               {course?.attributes?.title}
-            </h4>
-            <div className="course_category mt-2 flex items-center justify-between gap-2 text-xs">
-              <div className="left flex items-center gap-2 text-slate-500">
-                <p aria-hidden="true"><TbCategory2 /></p>
-                <p>{course?.attributes?.category}</p>
-              </div>
-              <div className="right text-black-800">
-                {course.attributes.discount ? (
-                  <div className="rounded-full bg-emerald-100 px-2 py-1 font-medium text-emerald-700">
-                    {course.attributes.discount}% Promo
-                  </div>
-                ) : (
-                  <div className="rounded-full bg-emerald-100 px-2 py-1 font-medium text-emerald-700">
-                    Free
-                  </div>
-                )}
-              </div>
-            </div>
-            <p className="owner-course mb-1 mt-2 text-xs text-slate-500">{course?.attributes?.Author}</p>
-            <div className="ratings flex items-center justify-between gap-2 pb-2 text-xs">
-              <span className="icons flex items-center gap-1 text-slate-600" aria-label={`Rating ${course.attributes.rating} out of 5`}>
-                {course?.attributes?.rating >= 4 ? (
-                  <div className="flex text-yellow-500" aria-hidden="true">
-                    <RiStarSLine />
-                    <RiStarSLine />
-                    <RiStarSLine />
-                    <RiStarSLine />
-                  </div>
-                ) : (
-                  <div className="flex text-yellow-500" aria-hidden="true">
-                    <RiStarSLine />
-                    <RiStarSLine />
-                    <RiStarSLine />
-                  </div>
-                )}
-                ({course.attributes.rating % 1 === 0 ? course.attributes.rating + '.0' : course.attributes.rating})
-              </span>
-              <button
-                type="button"
-                className="rounded-md px-2 py-1 text-xs font-medium text-emerald-700 transition-colors hover:bg-emerald-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleViewCourse(course.id);
-                }}
+            </h3>
+            <p className="text-cde-label-sm text-cde-on-surface-variant">
+              {course?.attributes?.Author ?? course?.attributes?.category}
+            </p>
+            <div className="flex items-center gap-1 text-cde-tertiary">
+              <span className="font-bold">{formatRating(course.attributes.rating)}</span>
+              <span
+                className="material-symbols-outlined text-xs"
+                style={{ fontVariationSettings: "'FILL' 1" }}
               >
-                Details
-              </button>
+                star
+              </span>
             </div>
+            <p className="text-cde-title-md text-cde-on-background">
+              {course.attributes.discount ? (
+                <>
+                  $
+                  {Math.round(
+                    course.attributes.price *
+                      (1 - Number(course.attributes.discount) / 100) *
+                      100
+                  ) / 100}
+                </>
+              ) : course.attributes.price > 0 ? (
+                <>${course.attributes.price}</>
+              ) : (
+                <>Free</>
+              )}
+            </p>
           </div>
         </article>
       ))}

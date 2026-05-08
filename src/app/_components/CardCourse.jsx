@@ -74,7 +74,7 @@ function CardCourse({ allCourses }) {
                   src={course.attributes.images.data[0].attributes.url}
                   width={200}
                   height={300}
-                  className="h-[220px] w-full object-cover transition duration-500 hover:scale-110"
+                  className="h-[220px] w-full object-fill transition duration-500 hover:scale-110"
                   alt={course?.attributes?.title ?? 'Course image'}
                   priority={true}
                 />

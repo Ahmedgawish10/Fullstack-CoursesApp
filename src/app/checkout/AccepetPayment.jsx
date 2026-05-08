@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useSearchParams } from 'next/navigation';
 import CheckoutForm from "./CheckoutForm";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY);
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 const AccepetPayment = () => {
   const searchParams = useSearchParams();
