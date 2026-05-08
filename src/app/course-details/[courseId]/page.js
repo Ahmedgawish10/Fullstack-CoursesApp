@@ -4,6 +4,7 @@ import CoursesApis from "../../_Utils/CoursesApis"
 import BreadCrumb from './BreadCrumb';
 import AboutCourse from './AboutCourse';
 import SimilarCourses from './SimilarCourses';
+import "../../_components/style.css";
 import "./CourseDetail.css";
 
 function page({ params }) {
@@ -30,13 +31,15 @@ function page({ params }) {
   }
 
   return (
-    <div className="w-[90%] mx-auto mt-[3rem]  mt-[64px]">
+    <div className="course-detail-page container mx-auto mb-16 mt-16 max-w-6xl px-4 sm:px-6">
       <BreadCrumb />
       <AboutCourse SingleCourseDetails={SingleCourseDetails} />
-      <div className="mt-[4rem]">
-        <h2>Similar Courses </h2>
+      <section className="mt-12 sm:mt-16" aria-labelledby="similar-courses-heading">
+        <h2 id="similar-courses-heading" className="text-xl font-semibold text-slate-900 sm:text-2xl">
+          Similar Courses
+        </h2>
         <SimilarCourses similarCourses={similarCourses} />
-      </div>
+      </section>
     </div>
   )
 }

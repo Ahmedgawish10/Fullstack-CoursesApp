@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import Link from 'next/link';
 import "./style_cart.css";
 import { useRouter } from 'next/navigation'
-
+import Image from 'next/image';
 const Cart = () => {
   const router = useRouter()
   const cart = useSelector(state => state.cart);
@@ -78,9 +78,11 @@ const Cart = () => {
                     <div key={index} className="">
                       <ul className="space-y-4 mb-3">
                         <li className="flex items-center gap-4">
-                          <img
-                            src={item?.attributes?.courses?.data[0]?.attributes?.images?.data?.attributes?.url}
-                            alt=""
+                          <Image
+                            src={item?.attributes?.courses?.data[0]?.attributes?.images?.data?.[0]?.attributes?.url}
+                            alt={item?.attributes?.courses?.data[0]?.attributes?.title}
+                            width={64}
+                            height={64}
                             className="size-16 rounded object-cover"
                           />
 

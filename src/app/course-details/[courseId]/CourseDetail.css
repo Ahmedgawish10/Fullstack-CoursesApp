@@ -1,89 +1,72 @@
-.about_course .img{
-    border:none;
-       height:400px;
-}
-@media screen and (max-width:700px){
-    .about_course .img{
-        border:none;
-        height:300px;
-    
-    }
-     .about_course .img img{
-        height:100% !important;
-
-    }
-
+/* Course detail hero — scoped to avoid clashing with listing cards */
+.course-detail-page .about_course .img {
+  border: none;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  height: auto;
+  min-height: 280px;
 }
 
-
-
-.img img{
-    cursor: pointer;
-    border-top-right-radius: 12px ;
-    border-top-left-radius: 12px;
-    width: 100% !important;
-          height:400px;
-          transition: .4s ease-in-out; ;
-
-}
-.img {
-    position:relative;
-    overflow:hidden;
-
-}
-.img > .course-overlay  {
-    border-top-right-radius: 12px ;
-    border-top-left-radius: 12px;    width: 100%;
-    height:100%;
-    position:absolute;
-    top:-100%;
-    background:#00000054;
-    display: block;
-    z-index:1;    
-    font-weight: bold;
-    transition: .5s ease-in-out; ;
-    display:flex;
-    align-items: center;    
-    justify-content: center; 
-}
-/* 000000ba */
-
-.img:hover .course-overlay   {
-    top:0%;
-    background:#000000ba;
-    transition:top  .5s ease-in-out; ;
-}
-.img:hover img{
-       transition: .5s ease-in-out; ;
-
-}
-.img:hover img{
-  transition: .5s ease-in-out; ;
-  transform:scale(1.4) !important;
-
+@media screen and (max-width: 700px) {
+  .course-detail-page .about_course .img {
+    min-height: 240px;
+  }
 }
 
-.heart:hover, .eye:hover{
-color:#ff00ff;
+.course-detail-page .about_course .img img {
+  cursor: pointer;
+  border-radius: 0.75rem;
+  width: 100% !important;
+  height: 100%;
+  min-height: 280px;
+  max-height: 420px;
+  object-fit: cover;
+  transition: 0.4s ease-in-out;
 }
-.owner-course{
-    font-size:11px;
+
+@media screen and (max-width: 700px) {
+  .course-detail-page .about_course .img img {
+    min-height: 240px;
+    max-height: 320px;
+  }
 }
 
+.course-detail-page .about_course .img {
+  position: relative;
+  overflow: hidden;
+}
 
+.course-detail-page .about_course .img > .course-overlay {
+  border-radius: 0.75rem;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -100%;
+  background: #00000054;
+  z-index: 1;
+  font-weight: bold;
+  transition: 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.course-detail-page .about_course .img:hover .course-overlay {
+  top: 0%;
+  background: #000000ba;
+  transition: top 0.5s ease-in-out;
+}
 
+.course-detail-page .about_course .img:hover img {
+  transition: 0.5s ease-in-out;
+  transform: scale(1.08) !important;
+}
 
+.course-detail-page .about_course .heart:hover,
+.course-detail-page .about_course .eye:hover {
+  color: #ff00ff;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+.course-detail-page .about_course .owner-course {
+  font-size: 11px;
+}

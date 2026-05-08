@@ -5,7 +5,7 @@ function Footer() {
   return (
     <div className="footer">
       <div className="part-two-footer">
-        <div className="container w-[90%] mx-auto">
+        <div className="container w-[90%] mx-auto pt-6">
           <div className="two-section">
             <div className="company">
               <div className="one">
@@ -66,7 +66,12 @@ function Footer() {
             <div className="left">
               All rights Reserved &reg; Courses Tec, 2024
             </div>
-            <div className="right">Made With ❤ BY Gawish</div>
+            <div className="right">
+              Made With ❤ BY <div className="text-orange-500 px-[5px]"> {" "} </div>
+              <Link href="https://ahmedgawish.vercel.app/" target="_blank">
+                Gawish
+              </Link>
+            </div>
           </div>
         </div>
       </div>

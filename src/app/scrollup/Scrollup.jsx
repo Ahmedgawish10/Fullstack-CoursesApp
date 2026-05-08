@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import "./scrollup.css";
 import { FaArrowUp } from "react-icons/fa";
-import { Link } from "react-scroll";
 
 const Scrollup = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollUp = document.querySelector(".scrollup");
@@ -22,11 +25,15 @@ const Scrollup = () => {
   }, []);
 
   return (
-    <div className="scrollup">
-   
-       <Link to={"home"} smooth={true} duration={0}>
-        <FaArrowUp className="text-2xl"/>
-      </Link>
+    <div className="scrollup" role="presentation">
+      <button
+        type="button"
+        className="flex items-center justify-center border-0 bg-transparent p-0 text-white cursor-pointer"
+        onClick={scrollToTop}
+        aria-label="Scroll to top"
+      >
+        <FaArrowUp className="text-2xl" aria-hidden />
+      </button>
     </div>
   );
 };

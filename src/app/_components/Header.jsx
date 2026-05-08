@@ -13,12 +13,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link';
 import CartApis from "../_Utils/CartApis";
+import WishlistApis from "../_Utils/WishlistApis";
+import { setWishlist } from "../_redux/WishlistSlice";
 import SearchCourse from "./SearchCourse";
 import "./style.css"
 
 function Header() {
   const dispatch = useDispatch()
   const cart = useSelector((state) => { return state.cart })
+  const wishlist = useSelector((state) => state.wishlist)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [courseName, setCourseName] = useState("");
 
@@ -31,12 +34,20 @@ function Header() {
   };
 
   useEffect(() => {
-    user && getUserCart();
+    if (!user) return;
+    getUserCart();
+    getUserWishlist();
   }, [user])
 
   const getUserCart = () => {
     CartApis.getCart(user.primaryEmailAddress.emailAddress).then((res) => dispatch(getcount(res.data.data)))
   }
+
+  const getUserWishlist = () => {
+    WishlistApis.getWishlist(user.primaryEmailAddress.emailAddress).then((res) =>
+      dispatch(setWishlist(res.data.data))
+    );
+  };
 
   function onCourseNameChange(e) {
     setCourseName(e.target.value)
@@ -114,7 +125,19 @@ function Header() {
                     </>
                   ) : (
                     <>
-                      <Link onClick={emptySearch} href="/wishlist" className="flex items-center text-black text-2xl hover:cursor-pointer"><FaRegHeart /></Link>
+                      <Link
+                        onClick={() => {
+                          emptySearch();
+                          getUserWishlist();
+                        }}
+                        href="/wishlist"
+                        className="flex items-center text-black text-2xl hover:cursor-pointer relative"
+                      >
+                        <FaRegHeart />
+                        <span className=" w-[20px] h-[20px] text-center rounded-full text-black absolute top-[-12px] right-[-8px] text-base bg-orange-400">
+                          {wishlist?.length || 0}
+                        </span>
+                      </Link>
                       <Link onClick={() => {
                         emptySearch();
                         getUserCart();
